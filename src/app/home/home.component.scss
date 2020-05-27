@@ -1,0 +1,66 @@
+$lt-gray: #ddd;
+$background-dark: #512DA8;
+$background-light: #9575CD;
+$background-pale: #D1C4E9;
+$background-moredark: #4527A0;
+@mixin zero-margin($pad-up-down, $pad-left-right) {
+    margin: 0px auto;
+    padding: $pad-up-down $pad-left-right;
+}
+.jumbotron {
+    @include zero-margin(70px,30px);
+    background: $background-light ;
+    color:floralwhite;
+    min-height: 150px;
+} 
+
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+td {
+  padding-right: 8px;
+}
+
+
+
+
+
+.backgroundcolor{
+	background-color:grey;
+}
+.image{
+ background-image:url('https://thumbs.dreamstime.com/b/cartoon-hostel-interior-bed-vector-illustration-cartoon-hostel-interior-bed-148285799.jpg');
+   height: 50%; 
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+}
+
+.jumbotron {
+ 
+  border-bottom:1px solid #ff6a00;
+
+}
+.jumbotron .container {
+
+  position:relative;
+  top:50px;
+}
+
+.example-card {
+  min-width: 400px;
+  grid-template-columns: 12px 12px 12px;
+grid-template-rows: 12px 12px 12px;
+}
+

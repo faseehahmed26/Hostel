@@ -1,0 +1,91 @@
+<div class="container jumbotron image "
+    fxLayout="row"
+    fxLayout.sm="column" 
+    fxLayout.xs="column" 
+    fxLayoutAlign.xs="start center"
+    fxLayoutAlign.sm="start center" 
+    fxLayoutAlign.gt-sm="center center" 
+    fxLayoutGap="10px"
+     >
+
+  <div fxFlex fxFlex.gt-sm="50%" style="color: black" >
+    <h1 >Hostel Finder</h1>
+    <h2>Live the Best, Study Well</h2>
+</div>
+  <div fxFlex=50 fxFlex.gt-sm="40%"   [@expand]>
+ <mat-card  >
+<form novalidate #detailForm="ngForm" (ngSubmit)="onSubmit()"  >
+    <p>
+      <mat-form-field appearance="outline" class="full-width">
+      	<mat-label><h5>Hostel Name</h5> </mat-label>
+        <input matInput placeholder="Search By City Or Hostel Name" type="text"   [(ngModel)]="details.destination" name="destination"  #destination="ngModel" required  >
+        <mat-error *ngIf="destination.errors?.required">Destination is required</mat-error>
+      </mat-form-field>
+    </p>
+    <p>
+    	<mat-form-field class="half-width" appearance="outline">
+      	<mat-label><h5>Check In Date</h5></mat-label>
+        <input matInput placeholder="{{checkInDate}}" [matDatepicker]="picker1" [formControl]="checkInDate">
+  		<mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+  		<mat-datepicker #picker1></mat-datepicker>
+        <mat-error *ngIf="checkInDate.errors?.required">Check In Date is required</mat-error>
+      </mat-form-field>
+      <mat-form-field class="half-width" appearance="outline">
+       	<mat-label><h5>Check Out Date</h5></mat-label>
+        <input matInput placeholder="{{checkInDate}}"  [matDatepicker]="picker2" [formControl]="checkOutDate">
+  		<mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+  		<mat-datepicker #picker2></mat-datepicker>
+        <mat-error *ngIf=" checkOutDate.errors?.required">Check Out Date is required</mat-error>
+      </mat-form-field>
+  </p>
+   <p>
+    	<mat-form-field appearance="outline" class="p1">
+      	<mat-label><h5>Guests</h5></mat-label>
+       	<mat-select placeholder="2" >
+            <mat-option *ngFor="let gtype of details.guest" [value]="gtype">
+              {{ gtype }}
+            </mat-option>
+        </mat-select>
+      </mat-form-field >
+       <mat-form-field  appearance="outline" class="p2">
+       	<mat-label><h5>Type Of Room</h5></mat-label>
+       	<mat-select placeholder="all" >
+            <mat-option *ngFor="let ttype of details.tor" [value]="ttype">
+              {{ ttype }}
+            </mat-option>
+        </mat-select>
+      </mat-form-field>
+  </p>
+  <span class="flex-spacer"></span>
+   <button class="full-width" type="submit" mat-raised-button color="warn"  >Search</button>
+</form>
+</mat-card>
+  </div>
+  <div fxFlex></div>
+
+</div>
+
+  
+ <div *ngIf="hostels">
+    <mat-grid-list cols="2" rowHeight="400px" [@expand]>
+       <mat-grid-tile *ngFor="let hostel of hostels" [routerLink]="['/hosteldetail', hostel.id]" appHighlight >
+       <img height="300px" width="auto" src="{{ BaseURL + hostel.image }}" alt="{{hostel.name}}">
+        <mat-grid-tile-footer>
+          <h1>{{hostel.name | uppercase}}</h1>
+
+         <h6 >
+           {{hostel.place}} 
+         </h6>
+        </mat-grid-tile-footer>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+  <div [hidden]="hostels || errMess">
+    <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
+  </div>
+   <div fxFlex *ngIf="errMess">
+    <h2>Error</h2>
+    <h4>{{errMess}}</h4>
+  </div>
+
+
