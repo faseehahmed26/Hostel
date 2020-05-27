@@ -77,8 +77,8 @@ import { HighlightDirective } from './directives/highlight.directive';
      HttpModule
   ],
   providers: [
-  HostelService,,
-  ProcessHTTPMsgService
+  HostelService,
+  ProcessHTTPMsgService,
   {provide: 'BaseURL', useValue: baseURL}
   ],
   entryComponents: [
